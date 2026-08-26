@@ -1,0 +1,24 @@
+class Modal extends HTMLElement {
+  constructor() {
+    super()
+    this.attachShadow({ mode: 'open' })
+    this.shadowRoot.innerHTML = `
+      <style>
+        #backdrop {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background-color: rgba(0, 0, 0, 0.75);
+          z-index: 10;
+        }
+      </style>
+      <div id="backdrop"></div>
+      <div id="modal"></div>
+
+    `
+  }
+}
+
+customElements.define('my-modal', Modal)
