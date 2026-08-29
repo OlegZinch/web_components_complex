@@ -4,6 +4,11 @@ class Modal extends HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = `
       <style>
+        :host([opened]) #backdrop,
+        :host([opened]) #modal {
+          opacity: 1;
+          pointer-events: all;
+        }
         #backdrop {
           position: fixed;
           top: 0;
@@ -66,6 +71,21 @@ class Modal extends HTMLElement {
       </div>
     `
   }
+
+  // attributeChangedCallback(name, oldValue, newValue) {
+  //   if (name === 'opened') {
+  //     if (this.hasAttribute('opened')) {
+  //       this.shadowRoot.querySelector('#backdrop').style.opacity = 1
+  //       this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all'
+  //       this.shadowRoot.querySelector('#modal').style.opacity = 1
+  //       this.shadowRoot.querySelector('#modal').style.pointerEvents = 'all'
+  //     }
+  //   }
+  // }
+
+  // static get observedAttributes() {
+  //   return ['opened']
+  // }
 }
 
 customElements.define('my-modal', Modal)
