@@ -79,6 +79,9 @@ class Modal extends HTMLElement {
     const confirmBtn = this.shadowRoot.querySelector('#confirm-btn')
     cancelBtn.addEventListener('click', this._cancel.bind(this))
     confirmBtn.addEventListener('click', this._confirm.bind(this))
+    // cancelBtn.addEventListener('cancel', () => {
+    //   console.log('Cancel inside the component')
+    // })
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -108,12 +111,16 @@ class Modal extends HTMLElement {
     this.isOpen = false
   }
 
-  _cancel() {
+  _cancel(event) {
     this.hide()
+    const cancelEvent = new Event('cancel')
+    event.target.dispatchEvent(cancelEvent)
   }
 
-  _confirm() {
+  _confirm(event) {
     this.hide()
+    const confirmEvent = new Event('confirm')
+    event.target.dispatchEvent(confirmEvent)
   }
 }
 
